@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating and Review</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .star {
+            font-size: 30px;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .star.active {
+            color: gold;
+        }
+        #userPicture {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Rate Our App</h1>
+    <div id="ratingSystem">
+        <span class="star" data-rating="1">&#9733;</span>
+        <span class="star" data-rating="2">&#9733;</span>
+        <span class="star" data-rating="3">&#9733;</span>
+        <span class="star" data-rating="4">&#9733;</span>
+        <span class="star" data-rating="5">&#9733;</span>
+    </div>
+    
+    <h2>Upload Your Picture</h2>
+    <input type="file" id="pictureUpload" accept="image/*">
+    <img id="userPicture" src="/api/placeholder/200/200" alt="User Picture">
+    
+    <h2>Leave a Comment</h2>
+    <textarea id="userComment" placeholder="Write your comment here..."></textarea>
+    <br><br>
+    <button id="submitReview">Submit Review</button>
+
+    <script>
+        $(document).ready(function() {
+            let currentRating = 0;
+
+            $('.star').on('click', function() {
+                currentRating = $(this).data('rating');
+                $('.star').removeClass('active');
+                $(this).prevAll('.star').addBack().addClass('active');
+            });
+
+            $('#pictureUpload').on('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#userPicture').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            $('#submitReview').on('click', function() {
+                const comment = $('#userComment').val();
+                if (currentRating === 0) {
+                    alert('Please select a rating before submitting.');
+                    return;
+                }
+                if (comment.trim() === '') {
+                    alert('Please write a comment before submitting.');
+                    return;
+                }
+                alert(`Thank you for your ${currentRating}-star review!\nYour comment: ${comment}`);
+                // Here you would typically send this data to a server
+            });
+        });
+    </script>
+</body>
+</html>

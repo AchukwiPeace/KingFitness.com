@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Gerald</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #8fafaa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgb(180, 225, 230);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        img {
+            width: 60%;
+            height: auto;
+            border-radius: 30%;
+            display: block;
+            margin: 10px auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #5cb85c;
+            color: rgb(241, 202, 247);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Contact Gerald</h1>
+        <img src="./img/Salvador1.png" alt="Salvador1 Picture">
+        <form onsubmit="handleSubmit(event)">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevents the default form submission
+            const name = event.target.name.value;
+            const email = event.target.email.value;
+            const message = event.target.message.value;
+
+            // Here you can implement actual form submission to a server
+            alert(`Message sent!\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
+
+            // Reset the form
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
